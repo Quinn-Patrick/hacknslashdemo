@@ -5272,6 +5272,7 @@ GameObject:
   - component: {fileID: 456218852}
   - component: {fileID: 456218851}
   - component: {fileID: 456218855}
+  - component: {fileID: 456218856}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5377,6 +5378,21 @@ MonoBehaviour:
   _maxHealthText: {fileID: 892310345}
   _coinText: {fileID: 1279600519}
   _keyText: {fileID: 1612054425}
+--- !u!114 &456218856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456218850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40277bdf77077314f9418ee4ef3502bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text:
+  - {fileID: 1687978773}
+  - {fileID: 1916629268}
 --- !u!4 &461755023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 593842698907122746, guid: c14864071b2bdbe40832bb2eaa322d1c, type: 3}

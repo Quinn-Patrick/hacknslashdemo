@@ -11,7 +11,12 @@ public class Game : MonoBehaviour
     public static ParticleEffectPool EffectPool;
     private static List<LivingEntity> ActiveEntities = new List<LivingEntity>();
     public static LivingEntity LastHit;
-    public static int _guiOffset = 0;
+    public static int GuiOffset = 0;
+    private static bool Paused = false;
+    private void Awake()
+    {
+        Game.PauseUnpause();
+    }
     public static void AddToActiveEntities(LivingEntity entity)
     {
         if (!Game.ActiveEntities.Contains(entity))
@@ -51,11 +56,21 @@ public class Game : MonoBehaviour
     }
     private void OnGUI()
     {
-        _guiOffset = 0;
+        GuiOffset = 0;
     }
     public static int GetGuiOffset()
     {
-        _guiOffset++;
-        return _guiOffset;
+        GuiOffset++;
+        return GuiOffset;
+    }
+    public static void PauseUnpause()
+    {
+        Paused = !Paused;
+        if (Paused) Time.timeScale = 0f;
+        if(!Paused) Time.timeScale = 1f;
+    }
+    public static bool IsPaused()
+    {
+        return Paused;
     }
 }

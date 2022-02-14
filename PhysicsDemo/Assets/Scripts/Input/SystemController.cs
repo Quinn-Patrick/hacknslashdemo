@@ -13,6 +13,9 @@ public class SystemController : MonoBehaviour
     private float _upDownInput;
     private float _leftRightInput;
 
+    private bool _canPressYes;
+    private bool _canPressNo;
+
     private void Awake()
     {
         if(Instance == null)
@@ -38,17 +41,26 @@ public class SystemController : MonoBehaviour
         _controls.SystemControls.UpDown.canceled += ctx => _upDownInput = 0f;
         _controls.SystemControls.LeftRight.canceled += ctx => _leftRightInput = 0f;
     }
+    private void Update()
+    {
+        if (!_yesPressed) _canPressYes = true;
+        if (!_noPressed) _canPressNo = true;
+
+        if (!_canPressYes) _yesPressed = false;
+        if (!_canPressNo) _noPressed = false;
+    }
     private void OnEnable()
     {
         _controls.SystemControls.Enable();
     }
-
     public bool YesPressed()
     {
+        if (_yesPressed) _canPressYes = false;
         return _yesPressed;
     }
     public bool NoPressed()
     {
+        if (_noPressed) _canPressNo = false;
         return _noPressed;
     }
     public float UpDownInput()
