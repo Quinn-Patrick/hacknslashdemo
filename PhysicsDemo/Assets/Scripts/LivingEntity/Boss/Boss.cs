@@ -27,21 +27,16 @@ public class Boss : LivingEntity, IBouncingEntity
 
         StoreSelf();
     }
-
     void Update()
     {
+        SynchronizeStates();
         _bounceTimer -= Time.deltaTime;
-        _state = _state.InterpretInput();
     }
-
-    
-
     private void OnControllerColliderHit(ControllerColliderHit collision)
     {
         Vector3 normal = collision.normal;
         Bounce(normal);
     }
-
     public void Bounce(Vector3 normal)
     {
         if (normal.y < 0.001 && _bounceTimer <= 0 && normal != _lastNormal)
@@ -59,23 +54,19 @@ public class Boss : LivingEntity, IBouncingEntity
             _targetAngle = normalAngle + (normalAngle - (_targetAngle - 180));
         }
     }
-
     public void Bounce(float normalAngle)
     {
         _targetAngle = normalAngle + (normalAngle - (_targetAngle - 180));
     }
-
     public bool CanBounce()
     {
         return (_bounceTimer <= 0);
     }
-
     public void ForceDirection(float angle)
     {
         _targetAngle = angle;
         _lastNormal = Vector3.zero;
     }
-
     public List<Orbiter> GetOrbiters()
     {
         return _orbiters;

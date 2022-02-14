@@ -20,12 +20,10 @@ public class StateBossDead : State
         }
         else _boss = null;
     }
-
     public override State InterpretInput()
     {
         return this;
     }
-
     new public State ForceStaggerState(float stagger)
     {
         return this;

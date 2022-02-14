@@ -8,17 +8,16 @@ public class BossHurtable : MonoBehaviour, IHurtable
     [SerializeField] private float _recoveryTimeMax = 0.5f;
     [SerializeField] private IBouncingEntity _owner;
     [SerializeField] private IReactsToHit _onHit;
+    private MeshRenderer _renderer;
     public Material _baseMaterial;
     public Material _ouchMaterial;
-
-
     private void Awake()
     {
         _recoveryTimeMax = 0.1f;
+        _renderer = gameObject.GetComponent<MeshRenderer>();
         _onHit = gameObject.GetComponent<IReactsToHit>();
         _owner = gameObject.GetComponent<IBouncingEntity>();
     }
-
     void OnTriggerEnter(Collider other)
     {
         CollideWithHitbox(other);
@@ -48,17 +47,17 @@ public class BossHurtable : MonoBehaviour, IHurtable
         }
         return false;
     }
-
     void Update()
     {
         _recoveryTime -= Time.deltaTime;
-        if (_recoveryTime > 0.01f)
+        if (_recoveryTime > 0.01f || _owner.IsDead())
         {
-            gameObject.GetComponent<MeshRenderer>().material = _ouchMaterial;
+            var hello = _ouchMaterial.color.a;
+            _renderer.material = _ouchMaterial;
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().material = _baseMaterial;
+            _renderer.material = _baseMaterial;
         }
     }
 }
